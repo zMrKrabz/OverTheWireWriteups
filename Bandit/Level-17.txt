@@ -1,0 +1,11 @@
+There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
+
+Use `diff` to get the difference between 2 files. 
+
+`diff passwords.old passwords.new` returns:
+42c42
+< hlbSBPAWJmL6WFDb06gpTx1pPButblOA
+---
+> kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+
+The password is `kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd`

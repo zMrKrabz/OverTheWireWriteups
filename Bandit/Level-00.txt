@@ -1,0 +1,12 @@
+To log onto the first level, do
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+The password should be bandit0
+
+This is where you would get the flag to access level 1
+
+The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
+
+When you first log onto the server, you will be put into the home directory. If you do `ls`, you would see there is a file called `readme`.
+Use `cat readme` to print out the contents of that file 
+The flag should be: `boJ9jbbUNNfktd78OOpsqOltutMc3MY1`
+

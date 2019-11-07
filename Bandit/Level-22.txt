@@ -1,0 +1,31 @@
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+Head back to `/etc/cron.d`. Now, we will examine `cronjob_bandit23`. Let's read it.
+
+@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+
+Now, let's head to `/usr/bin/cronjob_bandit23.sh` and read it.
+
+#!/bin/bash
+
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+
+cat /etc/bandit_pass/$myname > /tmp/$mytarget
+
+Wow, finding the target manually is confusing. Let's execute the script by doing `bash /usr/bin/cronjob_bandit23.sh`. Now, that outputs
+
+Copying passwordfile /etc/bandit_pass/bandit22 to /tmp/8169b67bd894ddbb4412f91573b38db3
+
+Well, that gets us the password for bandit22, our current user. We have to find some way to get the password for bandit23. Since this is a cron job, it is executed based on the schedule that the owner set. Let's find some way to get the location of the password of bandit23. First, we know the target is somewhere in `/tmp`. The target is defined as `echo I am user $myname | md5sum | cut -d ' ' -f 1`. myname can be translated into `whoami`, so the full command will be `echo I am user $(whoami) | md5sum | cut -d ' ' -f 1`. That will output for us
+
+8169b67bd894ddbb4412f91573b38db3
+
+Which is the location of the password of bandit22. Hmmm, if we just do `whoami`, we get `bandit22`. What if instead of executing `whoami`, we just replace that with `bandit23`? `echo I am user bandit23 | md5sum | cut -d ' ' -f 1` outputs:
+
+8ca319486bfbbc3663ea0fbe81326349
+
+Let's look at `/tmp/8ca319486bfbbc3663ea0fbe81326349`. Our password is `jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n`.

@@ -1,0 +1,32 @@
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+NOTE: This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!
+
+NOTE 2: Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…
+
+Let's check out the script for bandit24. Navigate to and read `/usr/bin/cronjob_bandit24.sh`. It outputs:
+
+#!/bin/bash
+
+myname=$(whoami)
+
+cd /var/spool/$myname
+echo "Executing and deleting all scripts in /var/spool/$myname:"
+for i in * .*;
+do
+    if [ "$i" != "." -a "$i" != ".." ];
+    then
+	echo "Handling $i"
+	timeout -s 9 60 ./$i
+	rm -f ./$i
+    fi
+done
+
+What this does is it executes all the scripts in `/var/spool/$(whoami)`. Since the script is invoked by the owner (bandit24), whoami will return bandit24, not bandit23. So, the correct path would be `/var/spool/bandit24`. Perfect. There is a test directory that we cannot access. That doesn't matter. What we want is the password to the bandit24 user. Remember, all passwords are stored in `/etc/bandit_pass`, and only the owner (corresponding owner) can read it. If the owner of `/etc/bandit_pass/bandit24` is bandit24, and the "person" executing the script is bandit24, we should be able to read the password. Let's try that.
+
+Our script should be like this:
+
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/winnder.txt
+
+In order for bandit24 to be able to execute the script, do `chmod 777 /var/spool/bandit24`. `chmod` modifies the permissions of a file. What we just did is allow everyone to execute the file. Now we wait for the job to be done. You'll know the job is done once /tmp/winner.txt exeists and it prints out the password to the next level `UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ`

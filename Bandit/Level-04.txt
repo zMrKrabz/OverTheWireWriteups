@@ -1,0 +1,21 @@
+The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+
+When do we `ls`, it displays the `inhere` directory. Do `cd inhere` to go into that directory. Now, if you do `ls`, it will display
+
+-file00  -file01  -file02  -file03  -file04  -file05  -file06  -file07  -file08  -file09
+
+According to the prompt, only one of them is human readable. To see the filetype of the files, do `file ./-*` `./-*` will match all the files in the directory that starts with `-`
+
+This will display:
+./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+
+Since -file07 is the only file with ASCII text, we can do `cat ./-file07`, giving us the flag `koReBOKuIDDepwhWk7jZC0RTdopnAYKh`

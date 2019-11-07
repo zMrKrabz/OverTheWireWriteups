@@ -1,0 +1,7 @@
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+
+Instantly, I knew it was a rot-13 cipher. To decode a string that is encoded in rot-13, you can use the `tr` command to translate or delete characters. `tr` matches the characters from SET1 to SET2 (command usage is `tr [SET1] [SET2]`). I did:
+
+cat data.txt | tr a-zA-Z n-za-mN-ZA-M
+
+to get the flag, '5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu` 

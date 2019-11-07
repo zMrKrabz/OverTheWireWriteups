@@ -1,0 +1,18 @@
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+First, navigate to `/etc/cron.d/` to see what commands are being ran. Once you do `ls`, you can see
+
+cronjob_bandit22  cronjob_bandit23  cronjob_bandit24
+
+The password will probably be in `cronjob_bandit22`. Let's `cat` the file.
+
+@reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+* * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+
+The path `/usr/bin/cronjob_bandit22.sh` is mentioned, let's check that out.
+
+#!/bin/bash
+chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+
+All this script does is read `/etc/bandit_pass/bandit22` and output it to `/tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv`, while giving everyone read permessions. `cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv` will output our password `Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI`

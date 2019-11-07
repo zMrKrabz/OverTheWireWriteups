@@ -1,0 +1,17 @@
+The password for the next level is stored in a file called spaces in this filename located in the home directory
+
+Once again, in order to connect to the server, you need to do `ssh -p 2220 bandit2@bandit.labs.overthewire.org` with the password being the flag from the last level, `CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9`.
+
+To start the level, do `ls` to check which files are in this directory. It will print out
+`spaces in this filename`
+
+To read a file with spaces in it's name, you need to wrap the filename in quotes, or escape the space character using `\`. There are 2 ways to get this flag
+
+cat "spaces in this filename"
+
+or
+
+cat ./spaces\ in\ this\ filename
+
+Both will give you the flag: `UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK`
+ 

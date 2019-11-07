@@ -1,0 +1,34 @@
+There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+
+Many solutions from other sources are now outdated, as this challenge was updated so you can no longer simply use 2 terminals. Instead, you have to use `screen` to spawn a new window and manage a listener from there. First, to spawn a new screen, do:
+
+`screen`
+
+This will put you into a new window on the same connection. Afterwards, crate a listener by doing:
+
+`nc -vv -l localhost`
+
+`nc` this time, instead of connecting to a server with nc, we are actually creating a service that listens for connections.
+`-vv` this flag makes the listener "more verbose", basially saying they're giving more information
+`-l` turns the command into listener mode
+`localhost` is the address we're on
+
+Now, you should have a listener ready. MAKE SURE TO TAKE NOTE OF THE PORT IT OCCUPIES. To get out of that screen, do:
+
+CTRL + a + d
+
+Something like this will print:
+
+[detached from 6611.pts-66.bandit]
+
+KEEP NOTE OF THIS. THIS IS THE ID OF THE SCREEN YOU HAVE YOUR LISTENER ON. Now, use the `setuid` binary to connect to the port.
+
+./suconnect $PORT
+
+This should print "Correct!" Now, in order to check out the password, go back to your screen by doing
+
+`screen -r $SCREENID`
+
+This should have the password.
+
+The password is gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr

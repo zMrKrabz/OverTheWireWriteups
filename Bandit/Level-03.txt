@@ -1,0 +1,9 @@
+The password for the next level is stored in a hidden file in the inhere directory.
+
+After connecting to the server, `ls` shows us a directory called `inhere`. You can use `cd` to go into that directory. Now, if you normally do `ls`, you would see that the directory is "empty". However, do display hidden files, you need to add the `-a` flag to `ls`.
+
+This will display when we do `ls -a`
+.  ..  .hidden
+
+Do `cat .hidden` to get the flag `pIwrPrtPN36QITSp3EQaw936yaFoFgAB`
+

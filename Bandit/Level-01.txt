@@ -1,0 +1,7 @@
+The password for the next level is stored in a file called - located in the home directory
+
+First, connect to the server doing `ssh -p 2220 bandit1@bandit.labs.overthewire.org`. The password would be the flag of the last level, so `boJ9jbbUNNfktd78OOpsqOltutMc3MY1`
+
+To get the flag, you need to do `cat ./-`. `./` will get you the absolute path of the file, and `-` is the name of the file. 
+
+The flag is `CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9`

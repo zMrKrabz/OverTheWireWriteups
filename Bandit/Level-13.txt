@@ -1,0 +1,7 @@
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on
+
+On this level, there is no password/flag, but you can directly level up to bandit14. In the home directory, you find a `ssh.private`. If you read the file, it turns out it is a RSA private key. One way to conect to a machine (the safer way) is to use RSA keys. TO connect with a file that has your private key, do:
+
+`ssh -i sshkey.private bandit14@localhosr`
+
+The `-i` flag specifies that you are using a file to connect to the server. `bandit14` is your username, and `localhost` means you're connecting to the same IP, just as a different user.

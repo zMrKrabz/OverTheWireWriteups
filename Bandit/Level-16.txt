@@ -1,0 +1,27 @@
+The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
+
+To scan for exposed ports on an ip with active services, you can use `nmap`. I scanned by doing:
+
+`nmap localhost -p 31000-32000`
+
+`-p` specifies that we are scanning from a range of ports, not just all ports
+
+You can use `openssl` to try to connect to all the ports it returned. On some, it hangs, and on other, it just echos what you said. 
+On port 31790, however, it returned `Correct!` and a private key. But what can we do with this private key? Well, if you remember on bandit13, you can use ssh to connect to a service using a RSA private key. Let's bring that over to a folder we can work with. GO back to `/etc/tmp` and create another folder under a different name, and paste the RSA key from `BEGIN RSA PRIVATE KEY` TO `END RSA PRIVATE KEY`. Now, let's try to connect
+
+`ssh -i bandit17.key bandit1r78@localhost`
+
+Oh no! That returns:
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0644 for 'bandit17.key' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "bandit17.key": bad permissions
+
+That makes sense. You only want yourself to be able to read your passwords, right? Let's modify these permissions:
+
+`chmod 600 bandit17.key`
+
+Try that again and you'll be in level17.

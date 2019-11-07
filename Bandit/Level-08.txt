@@ -1,0 +1,10 @@
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+
+If we do `ls`, it shows there is one file: `data.txt`. In order to find non repeating lines, you would need to use the command `uniq`. Grep does not help us in this case. However, `uniq` only finds lines that are matching to their adjacent line, as per the man page. Here, we would need to sort the file alphabetically, using the `sort` command. 
+
+So we need to do:
+`cat data.txt | sort | uniq`
+
+But that returns a bunch of random lines? Well, uniq's man page says "With no options, matching lines are merged to the first occurrence." This means it will print out all the lines, merging the repeated lines with one another. To only print the unique lines, you need the `-u` flag
+
+`cat data.txt | sort | uniq -u` would be our final command, giving us the flag: `UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR`

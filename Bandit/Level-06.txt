@@ -1,0 +1,21 @@
+The password for the next level is stored somewhere on the server and has all of the following properties:
+
+    owned by user bandit7
+    owned by group bandit6
+    33 bytes in size
+
+We're going to have to use the `find` command again. To specify the directory you want `find` to start finding in, you can do `find <directory>`. So `find /` would locate the file starting from the root directory, which is everything in the server. 
+
+To locate the file, do `find / -type f -size 33c -user bandit7 -group bandit6`
+`find /` means it's going to be looking for the file starting at the root directory
+`-type f` this flag means it's only going to be looking for files
+`-size 33c` this flag is used to find all files with 33 bytes
+`-user bandit7` specified the file is owned by bandit7
+`-group bandit6` specifies the file is owned by group bandit6
+
+Wow, that prints out a lot of `Permissions Denied`s. When managing a server, even if you allow people to gain access to your serevr, you don't want them to be able to do EVERYTHING. To get rid of the permission denied, we would need to add `2>/dev/null` to our command. This means if it ever returns a `Permission denied` (error code 2) it will not display the error, and yeet the error into /dev/null, aka the void. 
+So the correct command will be 
+
+`find / -type f -size 33c -user bandit7 -group bandit6 2>/dev/null`
+
+That will return `/var/lib/dpkg/info/bandit7.password`. Doing `cat /var/lib/dpkg/info/bandit7.password` will give us the password `HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs`

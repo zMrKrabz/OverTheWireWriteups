@@ -1,0 +1,17 @@
+The password for the next level is stored in the file data.txt in one of the few human-readable strings, beginning with several ‘=’ characters.
+
+After connecting to the serevr, there is a `data.txt` file. If we do `more data.txt`, it shows a bunch of random character. If we only want human readable strings, we can use the `strings` command!
+So you can do `cat data.txt | strings`, yet that still returns a lot of random lines. We can sort through the lines that start with `=` with `egrep`, grep with regex. So if you do 
+
+`cat data.txt | strings | egrep ^=`
+
+It returns 
+
+========== password
+========== isa
+=FQ?P\U
+=	F[
+=)$=
+========== truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+The password is `truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk`
