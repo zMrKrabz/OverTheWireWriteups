@@ -1,0 +1,15 @@
+Good job getting a shell! Now hurry and grab the password for bandit27!
+
+This one was a breather from all the chaos that was bandit 15-25. if you do ls, you find `bandit27.do`. If you examine it with `file bandit27.do`, you find that it is a setuid binary, basically invoking commands as another user. Let's do:
+
+`./bandit27.do whoami`
+
+THat outputs:
+
+`bandit27`
+
+Good. To get bandit27's flag, you must read `/etc/bandit_pass/bandit27`. We need to execute the `cat /etc/bandit_pass/bandit27` with ./bandit27-do. Let's try:
+
+./bandit27-do cat /etc/bandit_pass/bandit27
+
+The password is 3ba3118a22e93127a4ed485be72ef5ea

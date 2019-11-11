@@ -1,0 +1,32 @@
+There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo. The password for the user bandit29-git is the same as for the user bandit29.
+
+Clone the repository and find the password for the next level.
+
+Do what we did on bandit27. repo/README shows:
+
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: <no passwords in production!>
+
+Nothing shows in `git log`. However, if we use the `-p` flag, it will show the diff between each commit. Since there must be no password in production, let's see what other branches exists. Do:
+
+`git branch -r`
+
+There is a `/dev` branch. Lets see what's on that:
+
+git checkout dev
+
+Now README reads:
+
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: 5b90576bedb2cc04c86a9e924ce42faf
+

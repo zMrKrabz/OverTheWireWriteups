@@ -1,0 +1,28 @@
+There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. The password for the user bandit28-git is the same as for the user bandit28.
+
+Clone the repository and find the password for the next level.
+
+Do what we did the last level. In repo/README, it reads:
+
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: xxxxxxxxxx
+
+Hmmm, the password is censored. Since this is a challenge involving git, let's peep `git log` and see what happened.Commit `073c27c130e6ee407e12faad1dd3848a110c4f95` stands out. We need to revert the git commit to the previous one. Check out `https://stackoverflow.com/questions/4114095/how-do-i-revert-a-git-repository-to-a-previous-commit` on how to do that. In short, do:
+
+git checkout 073c27c130e6ee407e12faad1dd3848a110c4f95
+
+Now repo/README reads:
+
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: bbc96594b4e001778eee9975372716b2
+

@@ -1,0 +1,40 @@
+Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
+
+First, let's `ls` the home directory. There is a `bandit26.sshkey` file. Try to connect to the machine.
+`ssh -i bandit26.sshkey bandit26@localhost`
+
+That automatically closed the shell. Let's see what kind of shell the user has. We can see what shell a specific user has in `/etc/passwd`
+
+`cat /etc/passwd | grep bandit26`
+
+That outputs:
+bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtext
+
+When you cat /usr/bin/showtext, it outputs:
+
+```
+#!/bin/sh
+
+more ~/text.txt
+exit 0
+```
+
+This shell script let's the user read `~/text.txt` and then exits. The text.txt must be the banner (Bandit26) that we see when we pop a shell on the machine. The `more` command attempts to page the output of whatever it's reading, based on the size of your terminal. So in order to exploit this, you literally need to make your terminal shorter. You did it correctly if you popped a shell and it had
+
+More----(83%)
+
+Now, we have to get an actual shell from this. If you read the docs of `man more`, you find if you press `v`:
+
+Start up an editor at current line.  The editor is taken from  the  environment  variable VISUAL  if defined, or EDITOR if VISUAL is not defined, or defaults to vi if neither VISUAL nor EDITOR is defined.
+
+Once you press `v`, you should be in a `vim` editor. To get a bash shell through vim, do:
+
+:set shell sh=/bin/bash
+
+then run,
+
+:sh
+
+and you will be dropped into the bash shell. The password would be in /etc/bandit_pass/bandit26.
+
+The password is 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z

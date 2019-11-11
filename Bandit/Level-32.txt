@@ -1,0 +1,10 @@
+After all this git stuff its time for another escape. Good luck!
+
+Logging into the server displays:
+
+WELCOME TO THE UPPERCASE SHELL
+We can't execute any commands in uppercase. How can we espcape this shell? Well, if we do `$0`, it allows us to execute the shell again. Since $0 isn't a letter, it wouldn't be affected by uppercase shell.
+
+Now, execute whoami, showing you are bandit33. Get the password of bandit33 by doing `cat /etc/bandit_pass/bandit33`.
+
+The password is: c9c3199ddf4121b10cf581a98d51caee

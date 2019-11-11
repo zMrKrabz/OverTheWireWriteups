@@ -1,0 +1,27 @@
+There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo. The password for the user bandit31-git is the same as for the user bandit31.
+
+Clone the repository and find the password for the next level.
+
+This is what `README` says:
+
+This time your task is to push a file to the remote repository.
+
+Details:
+    File name: key.txt
+    Content: 'May I come in?'
+    Branch: master
+
+Let's make that file, with `vim`. After you've created the file following those details, do:
+
+git add key.txt
+git commit -m key.txt
+git push origin master
+
+Here's what you just did:
+- Added `key.txt` to your commit
+- Commited to master
+- Pushed to master
+
+If you get something about `.gitignore`, use the -f flag.
+
+The password is 56a9bf19c63d650ce78e6ec0354ee45e
